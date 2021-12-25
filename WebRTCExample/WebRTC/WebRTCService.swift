@@ -48,13 +48,14 @@ class WebRTCService: NSObject {
     
     private lazy var mediaConstraints: RTCMediaConstraints = RTCMediaConstraints(mandatoryConstraints: nil, optionalConstraints: nil)
     
-    lazy var localVideoSource: RTCVideoSource = {
+    lazy var localVideoSource: CustomVideoSource = {
         let localVideoSource = self.peerConnectionFactory.videoSource()
-        return localVideoSource
+        let forwardVideoSource = CustomVideoSource(rtcVideoSource: localVideoSource)
+        return forwardVideoSource
     }()
     
     private lazy var localVideoTrack: RTCVideoTrack = {
-        let localVideoTrack = self.peerConnectionFactory.videoTrack(with: self.localVideoSource, trackId: "com.zoey.localVideoTrack")
+        let localVideoTrack = self.peerConnectionFactory.videoTrack(with: self.localVideoSource.rtcVideoSource, trackId: "com.zoey.localVideoTrack")
         return localVideoTrack
     }()
     

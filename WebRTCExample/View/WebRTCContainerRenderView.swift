@@ -10,7 +10,8 @@ import UIKit
 
 class WebRTCContainerRenderView: UIView, RTCVideoViewDelegate {
     lazy var localRenderView: CustomVideoView = {
-        let localRenderView = CustomVideoView()
+        let shader = CustomDefaultShader()
+        let localRenderView = CustomVideoView(frame: .zero, shader: shader)
         localRenderView.translatesAutoresizingMaskIntoConstraints = false
         localRenderView.delegate = self
         return localRenderView

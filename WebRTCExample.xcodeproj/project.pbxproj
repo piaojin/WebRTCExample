@@ -10,6 +10,10 @@
 		3C61D53478DC22DDFA6CCD35 /* Pods_WebRTCExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18100AECFC8DFA3104BADB06 /* Pods_WebRTCExample.framework */; };
 		43139C7527623F78002E6ECC /* WebRTCContainerRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43139C7427623F78002E6ECC /* WebRTCContainerRenderView.swift */; };
 		43139C9B276479C9002E6ECC /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43139C9A276479C9002E6ECC /* Const.swift */; };
+		431BD883277406F700BC61AA /* CustomDefaultShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 431BD882277406F700BC61AA /* CustomDefaultShader.mm */; };
+		431BD8872774085E00BC61AA /* CustomNV12TextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BD8862774085E00BC61AA /* CustomNV12TextureCache.m */; };
+		431BD88A277408DB00BC61AA /* CustomI420TextureCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 431BD889277408DB00BC61AA /* CustomI420TextureCache.mm */; };
+		431BD88D277409D100BC61AA /* CustomPixelBufferProcesser.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */; };
 		436384D0275FA63C00009BFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384CF275FA63C00009BFB /* AppDelegate.swift */; };
 		436384D2275FA63C00009BFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384D1275FA63C00009BFB /* SceneDelegate.swift */; };
 		436384D4275FA63C00009BFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384D3275FA63C00009BFB /* ViewController.swift */; };
@@ -18,11 +22,12 @@
 		436384DC275FA64000009BFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 436384DA275FA64000009BFB /* LaunchScreen.storyboard */; };
 		436384E7275FAF1B00009BFB /* WebRTCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384E6275FAF1B00009BFB /* WebRTCService.swift */; };
 		436384E9275FAF3D00009BFB /* SignalingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384E8275FAF3D00009BFB /* SignalingService.swift */; };
-		436384EB275FB00400009BFB /* CustomVideoCapturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384EA275FB00400009BFB /* CustomVideoCapturer.swift */; };
 		436384ED275FB03400009BFB /* SignalingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436384EC275FB03400009BFB /* SignalingMessage.swift */; };
-		4363852A2760D7A900009BFB /* ForwardVideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436385292760D7A900009BFB /* ForwardVideoSource.swift */; };
+		4363852A2760D7A900009BFB /* CustomVideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436385292760D7A900009BFB /* CustomVideoSource.swift */; };
 		4363852C2760D87000009BFB /* CustomVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363852B2760D87000009BFB /* CustomVideoView.swift */; };
 		4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363852D2760E5B200009BFB /* CustomVideoCapturerService.swift */; };
+		43CB3FF62777777600400A1A /* CustomShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF52777777600400A1A /* CustomShader.mm */; };
+		43FA4F3227721B0C0077A2D4 /* ShaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,16 @@
 		2A1182C029C4D228275B7044 /* Pods-WebRTCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCExample.debug.xcconfig"; path = "Target Support Files/Pods-WebRTCExample/Pods-WebRTCExample.debug.xcconfig"; sourceTree = "<group>"; };
 		43139C7427623F78002E6ECC /* WebRTCContainerRenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCContainerRenderView.swift; sourceTree = "<group>"; };
 		43139C9A276479C9002E6ECC /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		431BD87927733D8700BC61AA /* CustomOpenGLDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomOpenGLDefines.h; sourceTree = "<group>"; };
+		431BD87B2773451300BC61AA /* CustomShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomShader.h; sourceTree = "<group>"; };
+		431BD881277406F700BC61AA /* CustomDefaultShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDefaultShader.h; sourceTree = "<group>"; };
+		431BD882277406F700BC61AA /* CustomDefaultShader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomDefaultShader.mm; sourceTree = "<group>"; };
+		431BD8852774085E00BC61AA /* CustomNV12TextureCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNV12TextureCache.h; sourceTree = "<group>"; };
+		431BD8862774085E00BC61AA /* CustomNV12TextureCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNV12TextureCache.m; sourceTree = "<group>"; };
+		431BD888277408DB00BC61AA /* CustomI420TextureCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomI420TextureCache.h; sourceTree = "<group>"; };
+		431BD889277408DB00BC61AA /* CustomI420TextureCache.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomI420TextureCache.mm; sourceTree = "<group>"; };
+		431BD88B277409D100BC61AA /* CustomPixelBufferProcesser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPixelBufferProcesser.h; sourceTree = "<group>"; };
+		431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPixelBufferProcesser.m; sourceTree = "<group>"; };
 		436384CC275FA63C00009BFB /* WebRTCExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebRTCExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		436384CF275FA63C00009BFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		436384D1275FA63C00009BFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,11 +55,13 @@
 		436384DD275FA64000009BFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		436384E6275FAF1B00009BFB /* WebRTCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCService.swift; sourceTree = "<group>"; };
 		436384E8275FAF3D00009BFB /* SignalingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingService.swift; sourceTree = "<group>"; };
-		436384EA275FB00400009BFB /* CustomVideoCapturer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoCapturer.swift; sourceTree = "<group>"; };
 		436384EC275FB03400009BFB /* SignalingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalingMessage.swift; sourceTree = "<group>"; };
-		436385292760D7A900009BFB /* ForwardVideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardVideoSource.swift; sourceTree = "<group>"; };
+		436385292760D7A900009BFB /* CustomVideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoSource.swift; sourceTree = "<group>"; };
 		4363852B2760D87000009BFB /* CustomVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoView.swift; sourceTree = "<group>"; };
 		4363852D2760E5B200009BFB /* CustomVideoCapturerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoCapturerService.swift; sourceTree = "<group>"; };
+		43CB3FF52777777600400A1A /* CustomShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomShader.mm; sourceTree = "<group>"; };
+		43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderUtils.swift; sourceTree = "<group>"; };
+		43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebRTCExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFF9A9D2A79BA50F0BE8456E /* Pods-WebRTCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCExample.release.xcconfig"; path = "Target Support Files/Pods-WebRTCExample/Pods-WebRTCExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,9 +89,28 @@
 		43139C7327623F53002E6ECC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4363852B2760D87000009BFB /* CustomVideoView.swift */,
 				43139C7427623F78002E6ECC /* WebRTCContainerRenderView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		431BD884277407B700BC61AA /* CustomShader */ = {
+			isa = PBXGroup;
+			children = (
+				431BD87927733D8700BC61AA /* CustomOpenGLDefines.h */,
+				431BD87B2773451300BC61AA /* CustomShader.h */,
+				43CB3FF52777777600400A1A /* CustomShader.mm */,
+				431BD881277406F700BC61AA /* CustomDefaultShader.h */,
+				431BD882277406F700BC61AA /* CustomDefaultShader.mm */,
+				431BD8852774085E00BC61AA /* CustomNV12TextureCache.h */,
+				431BD8862774085E00BC61AA /* CustomNV12TextureCache.m */,
+				431BD888277408DB00BC61AA /* CustomI420TextureCache.h */,
+				431BD889277408DB00BC61AA /* CustomI420TextureCache.mm */,
+				431BD88B277409D100BC61AA /* CustomPixelBufferProcesser.h */,
+				431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */,
+			);
+			path = CustomShader;
 			sourceTree = "<group>";
 		};
 		436384C3275FA63C00009BFB = {
@@ -98,6 +134,8 @@
 		436384CE275FA63C00009BFB /* WebRTCExample */ = {
 			isa = PBXGroup;
 			children = (
+				43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */,
+				43FA4F2C27721A020077A2D4 /* OpenGL */,
 				43139C7327623F53002E6ECC /* View */,
 				436384F0275FB08600009BFB /* Resources */,
 				436384EF275FB06C00009BFB /* AppDelegates */,
@@ -113,9 +151,6 @@
 			children = (
 				436384E6275FAF1B00009BFB /* WebRTCService.swift */,
 				436384E8275FAF3D00009BFB /* SignalingService.swift */,
-				436384EA275FB00400009BFB /* CustomVideoCapturer.swift */,
-				436385292760D7A900009BFB /* ForwardVideoSource.swift */,
-				4363852B2760D87000009BFB /* CustomVideoView.swift */,
 				4363852D2760E5B200009BFB /* CustomVideoCapturerService.swift */,
 			);
 			path = WebRTC;
@@ -124,6 +159,7 @@
 		436384E4275FAEBC00009BFB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				436385292760D7A900009BFB /* CustomVideoSource.swift */,
 				436384EC275FB03400009BFB /* SignalingMessage.swift */,
 				43139C9A276479C9002E6ECC /* Const.swift */,
 			);
@@ -156,6 +192,15 @@
 				436384DD275FA64000009BFB /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		43FA4F2C27721A020077A2D4 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				431BD884277407B700BC61AA /* CustomShader */,
+				43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */,
+			);
+			path = OpenGL;
 			sourceTree = "<group>";
 		};
 		9EF02E854AAC066131C38C64 /* Frameworks */ = {
@@ -200,6 +245,7 @@
 				TargetAttributes = {
 					436384CB275FA63C00009BFB = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -281,14 +327,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4363852A2760D7A900009BFB /* ForwardVideoSource.swift in Sources */,
+				4363852A2760D7A900009BFB /* CustomVideoSource.swift in Sources */,
 				436384D4275FA63C00009BFB /* ViewController.swift in Sources */,
+				43FA4F3227721B0C0077A2D4 /* ShaderUtils.swift in Sources */,
+				431BD883277406F700BC61AA /* CustomDefaultShader.mm in Sources */,
 				436384D0275FA63C00009BFB /* AppDelegate.swift in Sources */,
+				43CB3FF62777777600400A1A /* CustomShader.mm in Sources */,
 				43139C7527623F78002E6ECC /* WebRTCContainerRenderView.swift in Sources */,
-				436384EB275FB00400009BFB /* CustomVideoCapturer.swift in Sources */,
 				43139C9B276479C9002E6ECC /* Const.swift in Sources */,
 				4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */,
 				436384E7275FAF1B00009BFB /* WebRTCService.swift in Sources */,
+				431BD88A277408DB00BC61AA /* CustomI420TextureCache.mm in Sources */,
+				431BD8872774085E00BC61AA /* CustomNV12TextureCache.m in Sources */,
+				431BD88D277409D100BC61AA /* CustomPixelBufferProcesser.m in Sources */,
 				436384ED275FB03400009BFB /* SignalingMessage.swift in Sources */,
 				4363852C2760D87000009BFB /* CustomVideoView.swift in Sources */,
 				436384E9275FAF3D00009BFB /* SignalingService.swift in Sources */,
@@ -440,10 +491,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J5NZUFGLBJ;
 				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"GLES_SILENCE_DEPRECATION=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebRTCExample/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -460,6 +517,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo.WebRTCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WebRTCExample/WebRTCExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,10 +530,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J5NZUFGLBJ;
 				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"GLES_SILENCE_DEPRECATION=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebRTCExample/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -491,6 +556,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo.WebRTCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WebRTCExample/WebRTCExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
