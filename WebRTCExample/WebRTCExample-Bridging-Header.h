@@ -7,5 +7,7 @@
 
 #import "CustomPixelBufferProcesser.h"
 #import "CustomDefaultShader.h"
+#import "CustomVideoFrame.h"
+#import "ProcessPixelBufferProtocol.h"
 
 #endif /* WebRTCExample_Brigding_Header_h */

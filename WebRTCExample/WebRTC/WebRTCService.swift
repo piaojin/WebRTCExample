@@ -51,6 +51,7 @@ class WebRTCService: NSObject {
     lazy var localVideoSource: CustomVideoSource = {
         let localVideoSource = self.peerConnectionFactory.videoSource()
         let forwardVideoSource = CustomVideoSource(rtcVideoSource: localVideoSource)
+        forwardVideoSource.pixelBufferProcesser = CustomPixelBufferProcesser()
         return forwardVideoSource
     }()
     

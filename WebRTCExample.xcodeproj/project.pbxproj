@@ -26,7 +26,12 @@
 		4363852A2760D7A900009BFB /* CustomVideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436385292760D7A900009BFB /* CustomVideoSource.swift */; };
 		4363852C2760D87000009BFB /* CustomVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363852B2760D87000009BFB /* CustomVideoView.swift */; };
 		4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363852D2760E5B200009BFB /* CustomVideoCapturerService.swift */; };
+		4367A9B42779FB5B0075A811 /* CustomTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9B32779FB5B0075A811 /* CustomTextureCache.m */; };
+		4367A9B72779FE390075A811 /* CustomTargetShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9B62779FE390075A811 /* CustomTargetShader.mm */; };
+		4367A9BB277A0EA00075A811 /* CustomVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */; };
+		4367A9D6277B3D3B0075A811 /* CustomPixelBufferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */; };
 		43CB3FF62777777600400A1A /* CustomShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF52777777600400A1A /* CustomShader.mm */; };
+		43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */; };
 		43FA4F3227721B0C0077A2D4 /* ShaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +64,20 @@
 		436385292760D7A900009BFB /* CustomVideoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoSource.swift; sourceTree = "<group>"; };
 		4363852B2760D87000009BFB /* CustomVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoView.swift; sourceTree = "<group>"; };
 		4363852D2760E5B200009BFB /* CustomVideoCapturerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoCapturerService.swift; sourceTree = "<group>"; };
+		4367A9B22779FB5A0075A811 /* CustomTextureCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTextureCache.h; sourceTree = "<group>"; };
+		4367A9B32779FB5B0075A811 /* CustomTextureCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTextureCache.m; sourceTree = "<group>"; };
+		4367A9B52779FE390075A811 /* CustomTargetShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTargetShader.h; sourceTree = "<group>"; };
+		4367A9B62779FE390075A811 /* CustomTargetShader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomTargetShader.mm; sourceTree = "<group>"; };
+		4367A9B8277A03CC0075A811 /* ShaderProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderProtocol.h; sourceTree = "<group>"; };
+		4367A9B9277A0EA00075A811 /* CustomVideoFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoFrame.h; sourceTree = "<group>"; };
+		4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoFrame.m; sourceTree = "<group>"; };
+		4367A9BC277AB9F00075A811 /* ProcessPixelBufferProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcessPixelBufferProtocol.h; sourceTree = "<group>"; };
+		4367A9D4277B3D3B0075A811 /* CustomPixelBufferUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPixelBufferUtil.h; sourceTree = "<group>"; };
+		4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPixelBufferUtil.m; sourceTree = "<group>"; };
 		43CB3FF52777777600400A1A /* CustomShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomShader.mm; sourceTree = "<group>"; };
+		43CB3FF72778A4A600400A1A /* CustomShaderUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomShaderUtil.h; sourceTree = "<group>"; };
+		43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomShaderUtil.mm; sourceTree = "<group>"; };
+		43CB3FFA2778A59400400A1A /* CustomTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTypes.h; sourceTree = "<group>"; };
 		43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderUtils.swift; sourceTree = "<group>"; };
 		43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebRTCExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFF9A9D2A79BA50F0BE8456E /* Pods-WebRTCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCExample.release.xcconfig"; path = "Target Support Files/Pods-WebRTCExample/Pods-WebRTCExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,7 +113,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		431BD884277407B700BC61AA /* CustomShader */ = {
+		431BD884277407B700BC61AA /* CustomWebRTCShader */ = {
 			isa = PBXGroup;
 			children = (
 				431BD87927733D8700BC61AA /* CustomOpenGLDefines.h */,
@@ -107,10 +125,8 @@
 				431BD8862774085E00BC61AA /* CustomNV12TextureCache.m */,
 				431BD888277408DB00BC61AA /* CustomI420TextureCache.h */,
 				431BD889277408DB00BC61AA /* CustomI420TextureCache.mm */,
-				431BD88B277409D100BC61AA /* CustomPixelBufferProcesser.h */,
-				431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */,
 			);
-			path = CustomShader;
+			path = CustomWebRTCShader;
 			sourceTree = "<group>";
 		};
 		436384C3275FA63C00009BFB = {
@@ -194,10 +210,33 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		4367AA1A277CAA230075A811 /* CustomShader */ = {
+			isa = PBXGroup;
+			children = (
+				43CB3FF72778A4A600400A1A /* CustomShaderUtil.h */,
+				43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */,
+				43CB3FFA2778A59400400A1A /* CustomTypes.h */,
+				4367A9B22779FB5A0075A811 /* CustomTextureCache.h */,
+				4367A9B32779FB5B0075A811 /* CustomTextureCache.m */,
+				431BD88B277409D100BC61AA /* CustomPixelBufferProcesser.h */,
+				431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */,
+				4367A9B52779FE390075A811 /* CustomTargetShader.h */,
+				4367A9B62779FE390075A811 /* CustomTargetShader.mm */,
+				4367A9B9277A0EA00075A811 /* CustomVideoFrame.h */,
+				4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */,
+				4367A9B8277A03CC0075A811 /* ShaderProtocol.h */,
+				4367A9BC277AB9F00075A811 /* ProcessPixelBufferProtocol.h */,
+				4367A9D4277B3D3B0075A811 /* CustomPixelBufferUtil.h */,
+				4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */,
+			);
+			path = CustomShader;
+			sourceTree = "<group>";
+		};
 		43FA4F2C27721A020077A2D4 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				431BD884277407B700BC61AA /* CustomShader */,
+				4367AA1A277CAA230075A811 /* CustomShader */,
+				431BD884277407B700BC61AA /* CustomWebRTCShader */,
 				43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */,
 			);
 			path = OpenGL;
@@ -334,9 +373,13 @@
 				436384D0275FA63C00009BFB /* AppDelegate.swift in Sources */,
 				43CB3FF62777777600400A1A /* CustomShader.mm in Sources */,
 				43139C7527623F78002E6ECC /* WebRTCContainerRenderView.swift in Sources */,
+				4367A9B72779FE390075A811 /* CustomTargetShader.mm in Sources */,
+				4367A9BB277A0EA00075A811 /* CustomVideoFrame.m in Sources */,
 				43139C9B276479C9002E6ECC /* Const.swift in Sources */,
 				4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */,
+				43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */,
 				436384E7275FAF1B00009BFB /* WebRTCService.swift in Sources */,
+				4367A9B42779FB5B0075A811 /* CustomTextureCache.m in Sources */,
 				431BD88A277408DB00BC61AA /* CustomI420TextureCache.mm in Sources */,
 				431BD8872774085E00BC61AA /* CustomNV12TextureCache.m in Sources */,
 				431BD88D277409D100BC61AA /* CustomPixelBufferProcesser.m in Sources */,
@@ -344,6 +387,7 @@
 				4363852C2760D87000009BFB /* CustomVideoView.swift in Sources */,
 				436384E9275FAF3D00009BFB /* SignalingService.swift in Sources */,
 				436384D2275FA63C00009BFB /* SceneDelegate.swift in Sources */,
+				4367A9D6277B3D3B0075A811 /* CustomPixelBufferUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

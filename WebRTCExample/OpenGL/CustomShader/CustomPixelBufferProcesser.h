@@ -6,29 +6,22 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import <WebRTC/RTCMacros.h>
-#import <WebRTC/RTCVideoRenderer.h>
+#import "ProcessPixelBufferProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RTC_OBJC_TYPE(CustomPixelBufferProcesser);
+@class CustomVideoFrame;
 
-/**
- * RTCEAGLVideoView is an RTCVideoRenderer which renders video frames
- * in its bounds using OpenGLES 2.0 or OpenGLES 3.0.
- */
-RTC_OBJC_EXPORT
 NS_EXTENSION_UNAVAILABLE_IOS("Rendering not available in app extensions.")
-@interface RTC_OBJC_TYPE (CustomPixelBufferProcesser) : NSObject
+@interface CustomPixelBufferProcesser : NSObject<ProcessPixelBufferProtocol>
 
 - (instancetype)init;
 
-- (void)processBuffer:(RTCVideoFrame *)frame;
+/// Note: This function pass ownership of return value(CVPixelBufferRef) to the caller.
+- (CVPixelBufferRef _Nullable)processBuffer:(CustomVideoFrame *_Nullable)frame CF_RETURNS_RETAINED;
 
-/** @abstract Wrapped RTCVideoRotation, or nil.
- */
-@property(nonatomic, nullable) NSValue *rotationOverride;
+- (BOOL)shouldProcessFrameBuffer;
+
 @end
 
 NS_ASSUME_NONNULL_END

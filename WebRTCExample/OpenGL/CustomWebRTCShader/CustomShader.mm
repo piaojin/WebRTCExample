@@ -194,7 +194,7 @@ void RTCSetVertexData(RTCVideoRotation rotation) {
        1,  1, UVCoords[2][0], UVCoords[2][1],
       -1,  1, UVCoords[3][0], UVCoords[3][1],
   };
-    
+
     /*
      e.g: 手机竖屏时
      const GLfloat gVertices[] = {

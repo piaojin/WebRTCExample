@@ -7,11 +7,7 @@
 
 import WebRTC
 import Foundation
-
-protocol ProcessPixelBufferProtocol: NSObjectProtocol {
-    var shouldProcessFrameBuffer: Bool { get set }
-    func processBuffer(_ pixelBuffer: CVPixelBuffer) -> CVPixelBuffer?
-}
+import CoreVideo
 
 class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
     
@@ -19,12 +15,7 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
     
     private var orientation: UIInterfaceOrientation = .portrait
     
-    weak var pixelBufferProcesser: ProcessPixelBufferProtocol?
-    
-//    lazy var pixelBufferProcesserII: CustomPixelBufferProcesser = {
-//        let pixelBufferProcesser = CustomPixelBufferProcesser()
-//        return pixelBufferProcesser
-//    }()
+    var pixelBufferProcesser: ProcessPixelBufferProtocol?
     
     private var keyWindow: UIWindow? {
         // Get connected scenes
@@ -63,7 +54,7 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
         let fixedFrame = RTCVideoFrame(buffer: frame.buffer, rotation: fixFrameRotation(statusBarOrientation: orientation, isUsingFrontCamera: isFrontCamera), timeStampNs: frame.timeStampNs)
         var videoFrame: RTCVideoFrame = frame
         
-        if pixelBufferProcesser?.shouldProcessFrameBuffer == true {
+        if pixelBufferProcesser?.shouldProcessFrameBuffer() == true {
             var originalRTCPixelBuffer: CVPixelBuffer?
             
             // Get original RTC pixelBuffer
@@ -72,14 +63,13 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
             }
             
             // Process pixelBuffer. e.g. Add filter, effects
-            if let originalRTCPixelBuffer = originalRTCPixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(originalRTCPixelBuffer) {
+            if let originalRTCPixelBuffer = originalRTCPixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(CustomVideoFrame(buffer: originalRTCPixelBuffer, rotation: convertVideoRotation(rotation: fixedFrame.rotation), timeStampNs: fixedFrame.timeStampNs)) {
                 // Forward frame to RTCVideoSource
                 let processedPixelBuffer: RTCCVPixelBuffer = RTCCVPixelBuffer(pixelBuffer: reusltPixelBuffer)
                 videoFrame = RTCVideoFrame(buffer: processedPixelBuffer, rotation: fixedFrame.rotation, timeStampNs: fixedFrame.timeStampNs)
             }
         }
         
-//        pixelBufferProcesserII.processBuffer(videoFrame)
         rtcVideoSource.capturer(capturer, didCapture: videoFrame)
     }
     
@@ -111,5 +101,20 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
             break
         }
         return rotation
+    }
+    
+    private func convertVideoRotation(rotation: RTCVideoRotation) -> CustomVideoRotation {
+        switch rotation {
+        case ._0:
+            return ._0
+        case ._90:
+            return ._90
+        case ._180:
+            return ._180
+        case ._270:
+            return ._270
+        @unknown default:
+            return ._90
+        }
     }
 }
