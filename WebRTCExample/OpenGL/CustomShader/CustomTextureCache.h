@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CustomVideoFrame;
-
 @interface CustomTextureCache : NSObject
 
 /// yTexture and uvTexture both are two texture. Use them to access texture.

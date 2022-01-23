@@ -10,7 +10,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
-@class CustomVideoFrame;
 
 NS_ASSUME_NONNULL_BEGIN
 

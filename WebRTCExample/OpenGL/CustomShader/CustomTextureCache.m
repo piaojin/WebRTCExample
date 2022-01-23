@@ -6,7 +6,6 @@
 //
 
 #import "CustomTextureCache.h"
-#import "CustomVideoFrame.h"
 
 @implementation CustomTextureCache {
     CVOpenGLESTextureCacheRef _textureCache;

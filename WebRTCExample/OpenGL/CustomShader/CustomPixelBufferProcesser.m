@@ -10,7 +10,6 @@
 #import "CustomTargetShader.h"
 #import <GLKit/GLKit.h>
 #import "ShaderProtocol.h"
-#import "CustomVideoFrame.h"
 
 @interface CustomPixelBufferProcesser()
 

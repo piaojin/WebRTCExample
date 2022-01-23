@@ -10,7 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CustomVideoFrame;
 @protocol ShaderProtocol;
 
 NS_EXTENSION_UNAVAILABLE_IOS("Rendering not available in app extensions.")
