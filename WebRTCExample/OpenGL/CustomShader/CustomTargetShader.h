@@ -19,9 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CustomTargetShader : NSObject<ShaderProtocol>
 
-@property(nonatomic, readonly) GLuint VBO;
-@property(nonatomic, readonly) GLuint VAO;
-@property(nonatomic, readonly) GLuint program;
 @property(nonatomic, readonly) EAGLContext *glContext;
 
 /// glContext used for creating texture cache and should the same as the one which used for process pixel buffer. And the glContext will set value by CustomPixelBufferProcesser.
