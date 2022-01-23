@@ -5,7 +5,7 @@
 //  Created by rcadmin on 2021/12/23.
 //
 
-#import "CustomDefaultShader.h"
+#import "CustomRTCDefaultShader.h"
 
 #if TARGET_OS_IPHONE
 #import <OpenGLES/ES3/gl.h>
@@ -14,7 +14,7 @@
 #endif
 
 #import "CustomOpenGLDefines.h"
-#import "CustomShader.h"
+#import "CustomRTCShader.h"
 #import <WebRTC/RTCLogging.h>
 
 #include "absl/types/optional.h"
@@ -93,7 +93,7 @@ static const char kNV12FragmentShaderSource[] =
   "  }\n";
 
 
-@implementation CustomDefaultShader {
+@implementation CustomRTCDefaultShader {
   GLuint _VBO;
   GLuint _VAO;
   // Store current rotation and only upload new vertex data when rotation changes.

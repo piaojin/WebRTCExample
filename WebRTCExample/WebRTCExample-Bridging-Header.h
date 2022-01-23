@@ -6,7 +6,7 @@
 #define WebRTCExample_Brigding_Header_h
 
 #import "CustomPixelBufferProcesser.h"
-#import "CustomDefaultShader.h"
+#import "CustomRTCDefaultShader.h"
 #import "ProcessPixelBufferProtocol.h"
 #import "CustomTypes.h"
 

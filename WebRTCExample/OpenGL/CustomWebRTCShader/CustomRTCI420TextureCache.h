@@ -1,5 +1,5 @@
 //
-//  CustomI420TextureCache.h
+//  CustomRTCI420TextureCache.h
 //  WebRTCExample
 //
 //  Created by rcadmin on 2021/12/23.
@@ -8,7 +8,7 @@
 #import "CustomOpenGLDefines.h"
 #import <WebRTC/RTCVideoFrame.h>
 
-@interface CustomI420TextureCache : NSObject
+@interface CustomRTCI420TextureCache : NSObject
 
 @property(nonatomic, readonly) GLuint yTexture;
 @property(nonatomic, readonly) GLuint uTexture;

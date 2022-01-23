@@ -1,24 +1,20 @@
 //
-//  CustomTextureCache.m
+//  CustomNV12TextureCache.m
 //  WebRTCExample
 //
-//  Created by rcadmin on 2021/12/27.
+//  Created by rcadmin on 2021/12/23.
 //
 
-#import "CustomTextureCache.h"
+#import "CustomRTCNV12TextureCache.h"
 
-@implementation CustomTextureCache {
-    CVOpenGLESTextureCacheRef _textureCache;
-    CVOpenGLESTextureRef _yTextureRef;
-    CVOpenGLESTextureRef _uvTextureRef;
-}
+#import <WebRTC/RTCVideoFrame.h>
+#import <WebRTC/RTCVideoFrameBuffer.h>
+#import <WebRTC/RTCCVPixelBuffer.h>
 
-- (GLenum)yTextureTarget {
-    return CVOpenGLESTextureGetTarget(_yTextureRef);
-}
-
-- (GLenum)uvTextureTarget {
-    return CVOpenGLESTextureGetTarget(_uvTextureRef);
+@implementation CustomRTCNV12TextureCache {
+  CVOpenGLESTextureCacheRef _textureCache;
+  CVOpenGLESTextureRef _yTextureRef;
+  CVOpenGLESTextureRef _uvTextureRef;
 }
 
 - (GLuint)yTexture {
@@ -50,17 +46,16 @@
         pixelBuffer:(CVPixelBufferRef)pixelBuffer
          planeIndex:(int)planeIndex
         pixelFormat:(GLenum)pixelFormat {
-  const size_t width = CVPixelBufferGetWidthOfPlane(pixelBuffer, planeIndex);
-  const size_t height = CVPixelBufferGetHeightOfPlane(pixelBuffer, planeIndex);
-    
+  const int width = CVPixelBufferGetWidthOfPlane(pixelBuffer, planeIndex);
+  const int height = CVPixelBufferGetHeightOfPlane(pixelBuffer, planeIndex);
+
   if (*textureOut) {
     CFRelease(*textureOut);
     *textureOut = nil;
   }
-    
   CVReturn ret = CVOpenGLESTextureCacheCreateTextureFromImage(
-      kCFAllocatorDefault, _textureCache, pixelBuffer, NULL, GL_TEXTURE_2D, pixelFormat, (GLsizei)width,
-      (GLsizei)height, pixelFormat, GL_UNSIGNED_BYTE, planeIndex, textureOut);
+      kCFAllocatorDefault, _textureCache, pixelBuffer, NULL, GL_TEXTURE_2D, pixelFormat, width,
+      height, pixelFormat, GL_UNSIGNED_BYTE, planeIndex, textureOut);
   if (ret != kCVReturnSuccess) {
     if (*textureOut) {
       CFRelease(*textureOut);
@@ -78,13 +73,17 @@
   return YES;
 }
 
-- (BOOL)uploadFrameToTextures:(CVPixelBufferRef)buffer {
+- (BOOL)uploadFrameToTextures:(RTC_OBJC_TYPE(RTCVideoFrame) *)frame {
+  NSAssert([frame.buffer isKindOfClass:[RTC_OBJC_TYPE(RTCCVPixelBuffer) class]],
+           @"frame must be CVPixelBuffer backed");
+  RTC_OBJC_TYPE(RTCCVPixelBuffer) *rtcPixelBuffer = (RTC_OBJC_TYPE(RTCCVPixelBuffer) *)frame.buffer;
+  CVPixelBufferRef pixelBuffer = rtcPixelBuffer.pixelBuffer;
   return [self loadTexture:&_yTextureRef
-               pixelBuffer:buffer
+               pixelBuffer:pixelBuffer
                 planeIndex:0
                pixelFormat:GL_LUMINANCE] &&
          [self loadTexture:&_uvTextureRef
-               pixelBuffer:buffer
+               pixelBuffer:pixelBuffer
                 planeIndex:1
                pixelFormat:GL_LUMINANCE_ALPHA];
 }
@@ -94,7 +93,6 @@
     CFRelease(_uvTextureRef);
     _uvTextureRef = nil;
   }
-    
   if (_yTextureRef) {
     CFRelease(_yTextureRef);
     _yTextureRef = nil;
@@ -103,7 +101,6 @@
 
 - (void)dealloc {
   [self releaseTextures];
-    
   if (_textureCache) {
     CFRelease(_textureCache);
     _textureCache = nil;
@@ -111,3 +108,4 @@
 }
 
 @end
+

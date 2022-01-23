@@ -5,7 +5,7 @@
 //  Created by rcadmin on 2021/12/23.
 //
 
-#import "CustomI420TextureCache.h"
+#import "CustomRTCI420TextureCache.h"
 
 #if TARGET_OS_IPHONE
 #import <OpenGLES/ES3/gl.h>
@@ -25,7 +25,7 @@ static const GLsizei kNumTextureSets = 2;
 static const GLsizei kNumTexturesPerSet = 3;
 static const GLsizei kNumTextures = kNumTexturesPerSet * kNumTextureSets;
 
-@implementation CustomI420TextureCache {
+@implementation CustomRTCI420TextureCache {
   BOOL _hasUnpackRowLength;
   GLint _currentTextureSet;
   // Handles for OpenGL constructs.

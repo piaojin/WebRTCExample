@@ -6,7 +6,7 @@
 //
 
 #import "CustomPixelBufferProcesser.h"
-#import "CustomTextureCache.h"
+#import "CustomNV12TextureCache.h"
 #import "CustomTargetShader.h"
 #import <GLKit/GLKit.h>
 #import "ShaderProtocol.h"
@@ -14,7 +14,7 @@
 @interface CustomPixelBufferProcesser()
 
 @property(nonatomic, strong) EAGLContext *glContext;
-@property(nonatomic, strong) CustomTextureCache *textureCache;
+@property(nonatomic, strong) CustomNV12TextureCache *nv12TextureCache;
 @property(nonatomic, assign) int64_t lastDrawnFrameTimeStampNs;
 @property(nonatomic) id<ShaderProtocol> shader;
 
@@ -111,14 +111,14 @@
     glClear(GL_COLOR_BUFFER_BIT);
     
     // 上传pixel buffer到OpenGL ES
-    [self.textureCache uploadFrameToTextures:pixelBuffer];
+    [self.nv12TextureCache uploadFrameToTextures:pixelBuffer];
     
     CGSize textureSize = CGSizeMake(CVPixelBufferGetWidth(pixelBuffer),
                                     CVPixelBufferGetHeight(pixelBuffer));
     // 应用着色器(包含绘制)
-    CVPixelBufferRef resPixelBuffer = [_shader applyShadingForTextureWithRotation:orientation yPlane:_textureCache.yTexture uvPlane:_textureCache.uvTexture textureSize:textureSize];
+    CVPixelBufferRef resPixelBuffer = [_shader applyShadingForTextureWithRotation:orientation yPlane:_nv12TextureCache.yTexture uvPlane:_nv12TextureCache.uvTexture textureSize:textureSize];
   
-    [_textureCache releaseTextures];
+    [_nv12TextureCache releaseTextures];
     _lastDrawnFrameTimeStampNs = timeStampNs;
     
     return resPixelBuffer;
@@ -137,7 +137,7 @@
 
 - (void)teardownGL {
     [self ensureGLContext];
-    _textureCache = nil;
+    _nv12TextureCache = nil;
 }
 
 - (void)didBecomeActive {
@@ -155,11 +155,11 @@
     }
 }
 
-- (CustomTextureCache *)textureCache {
-    if (!_textureCache) {
-      _textureCache = [[CustomTextureCache alloc] initWithContext:_glContext];
+- (CustomNV12TextureCache *)nv12TextureCache {
+    if (!_nv12TextureCache) {
+      _nv12TextureCache = [[CustomNV12TextureCache alloc] initWithContext:_glContext];
     }
-    return _textureCache;
+    return _nv12TextureCache;
 }
 
 @end

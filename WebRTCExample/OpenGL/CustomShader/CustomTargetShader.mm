@@ -7,7 +7,6 @@
 
 #import "CustomTargetShader.h"
 #import "CustomOpenGLDefines.h"
-#import "CustomShader.h"
 #import "CustomShaderUtil.h"
 #import "CustomPixelBufferUtils.h"
 

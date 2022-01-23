@@ -1,5 +1,5 @@
 //
-//  CustomTextureCache.h
+//  CustomNV12TextureCache.h
 //  WebRTCExample
 //
 //  Created by rcadmin on 2021/12/27.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomTextureCache : NSObject
+@interface CustomNV12TextureCache : NSObject
 
 /// yTexture and uvTexture both are two texture. Use them to access texture.
 @property(nonatomic, readonly) GLuint yTexture;

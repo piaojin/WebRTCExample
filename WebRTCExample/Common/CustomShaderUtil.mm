@@ -6,7 +6,7 @@
 //
 
 #import "CustomShaderUtil.h"
-#import "CustomOpenGLDefines.h"
+//#import "CustomOpenGLDefines.h"
 
 @implementation CustomShaderUtil
 

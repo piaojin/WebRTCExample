@@ -1,11 +1,11 @@
 //
-//  CustomShader.m
+//  CustomRTCShader.m
 //  WebRTCExample
 //
 //  Created by rcadmin on 2021/12/22.
 //
 
-#import "CustomShader.h"
+#import "CustomRTCShader.h"
 
 #if TARGET_OS_IPHONE
 #import <OpenGLES/ES3/gl.h>

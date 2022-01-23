@@ -1,5 +1,5 @@
 //
-//  CustomNV12TextureCache.h
+//  CustomRTCNV12TextureCache.h
 //  WebRTCExample
 //
 //  Created by rcadmin on 2021/12/23.
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomNV12TextureCache : NSObject
+@interface CustomRTCNV12TextureCache : NSObject
 
 @property(nonatomic, readonly) GLuint yTexture;
 @property(nonatomic, readonly) GLuint uvTexture;
