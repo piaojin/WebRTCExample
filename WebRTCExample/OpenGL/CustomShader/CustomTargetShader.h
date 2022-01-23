@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
-//#import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
 #else
 #import <OpenGL/gl3.h>
@@ -25,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setGlContext:(EAGLContext *)glContext;
 
 /// Apply shaders. Each plane is given as a texture. Process NV12 pixel buffer.
-- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
+- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(UIInterfaceOrientation)orientation
                                yPlane:(GLuint)yPlane
                               uvPlane:(GLuint)uvPlane textureSize:(CGSize)textureSize CF_RETURNS_RETAINED;
 

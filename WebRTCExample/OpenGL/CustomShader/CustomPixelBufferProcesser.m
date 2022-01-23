@@ -35,6 +35,7 @@
     return self;
 }
 
+/// Use custom shader.
 - (instancetype)initWithShader:(id<ShaderProtocol>)shader {
     if (self = [super init]) {
         if (![self configure]) {
@@ -100,10 +101,10 @@
 }
 
 /// Note: This function pass ownership of return value(CVPixelBufferRef) to the caller.
-- (CVPixelBufferRef _Nullable)processBuffer:(CustomVideoFrame *_Nullable)frame CF_RETURNS_RETAINED {
+- (CVPixelBufferRef _Nullable)processBuffer:(CVPixelBufferRef _Nullable)pixelBuffer orientation:(UIInterfaceOrientation)orientation timeStampNs:(int64_t)timeStampNs CF_RETURNS_RETAINED {
     // The renderer will draw the frame to the framebuffer corresponding to the
     // one used by |view|.
-    if (!frame || frame.timeStampNs == _lastDrawnFrameTimeStampNs) {
+    if (!pixelBuffer || timeStampNs == _lastDrawnFrameTimeStampNs) {
         return nil;
     }
   
@@ -111,17 +112,17 @@
     glClear(GL_COLOR_BUFFER_BIT);
     
     // 上传pixel buffer到OpenGL ES
-    [self.textureCache uploadFrameToTextures:frame.buffer];
+    [self.textureCache uploadFrameToTextures:pixelBuffer];
     
-    CGSize textureSize = CGSizeMake(CVPixelBufferGetWidth(frame.buffer),
-                                    CVPixelBufferGetHeight(frame.buffer));
+    CGSize textureSize = CGSizeMake(CVPixelBufferGetWidth(pixelBuffer),
+                                    CVPixelBufferGetHeight(pixelBuffer));
     // 应用着色器(包含绘制)
-    CVPixelBufferRef pixelBuffer = [_shader applyShadingForTextureWithRotation:frame.rotation yPlane:_textureCache.yTexture uvPlane:_textureCache.uvTexture textureSize:textureSize];
+    CVPixelBufferRef resPixelBuffer = [_shader applyShadingForTextureWithRotation:orientation yPlane:_textureCache.yTexture uvPlane:_textureCache.uvTexture textureSize:textureSize];
   
     [_textureCache releaseTextures];
-    _lastDrawnFrameTimeStampNs = frame.timeStampNs;
+    _lastDrawnFrameTimeStampNs = timeStampNs;
     
-    return pixelBuffer;
+    return resPixelBuffer;
 }
 
 - (BOOL)shouldProcessFrameBuffer {

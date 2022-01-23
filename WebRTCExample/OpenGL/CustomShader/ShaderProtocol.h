@@ -8,9 +8,11 @@
 #ifndef ShaderProtocol_h
 #define ShaderProtocol_h
 
-#import <Foundation/Foundation.h>
 #import "CustomTypes.h"
 #import <AVFoundation/AVFoundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol ShaderProtocol <NSObject>
 
@@ -20,10 +22,12 @@
 - (void)setGlContext:(EAGLContext *)glContext;
 
 /// Apply shaders. Each plane is given as a texture. Process NV12 pixel buffer.
-- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
+- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(UIInterfaceOrientation)orientation
                                yPlane:(GLuint)yPlane
                               uvPlane:(GLuint)uvPlane textureSize:(CGSize)textureSize CF_RETURNS_RETAINED;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* ShaderProtocol_h */

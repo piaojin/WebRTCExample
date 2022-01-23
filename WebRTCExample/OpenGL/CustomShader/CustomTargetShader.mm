@@ -11,10 +11,6 @@
 #import "CustomShaderUtil.h"
 #import "CustomPixelBufferUtils.h"
 
-// TODO: Remove if needed
-#import <GLKit/GLKit.h>
-#include <libyuv-iOS/libyuv.h>
-
 static const int kYTextureUnit = 0;
 static const int kUvTextureUnit = 1;
 
@@ -146,7 +142,7 @@ static const char kFragmentShaderSource[] =
 }
 
 /// 应用着色器. Each plane is given as a texture.
-- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
+- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(UIInterfaceOrientation)orientation
                                yPlane:(GLuint)yPlane
                               uvPlane:(GLuint)uvPlane textureSize:(CGSize)textureSize CF_RETURNS_RETAINED {
     // Create BGRA pixel buffer for FBO
@@ -210,7 +206,7 @@ static const char kFragmentShaderSource[] =
     }
   
     // 设置VAO,VBO并且上传顶点数据, FBO中的buffer方向不对, 通过纹理坐标来修正.
-    if (![self prepareVertexBufferWithRotation:rotation]) {
+    if (![self prepareVertexBufferWithRotation:[self convertOrientationFrom:orientation]]) {
         return nil;
     }
 
@@ -254,6 +250,21 @@ static const char kFragmentShaderSource[] =
     }
     
     return targetPixelBuffer;
+}
+
+- (CustomVideoRotation)convertOrientationFrom:(UIInterfaceOrientation)orientation {
+    switch (orientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationUnknown:
+            return CustomVideoRotation_90;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            return CustomVideoRotation_270;
+        case UIInterfaceOrientationLandscapeLeft:
+            return CustomVideoRotation_0;
+        case UIInterfaceOrientationLandscapeRight:
+            return CustomVideoRotation_180;
+    }
+    return CustomVideoRotation_90;
 }
 
 @end

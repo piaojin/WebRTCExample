@@ -63,13 +63,8 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
             }
             
             // Process pixelBuffer. e.g. Add filter, effects
-            if let originalRTCPixelBuffer = pixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(CustomVideoFrame(buffer: originalRTCPixelBuffer, rotation: convertVideoRotation(rotation: fixedFrame.rotation), timeStampNs: fixedFrame.timeStampNs)) {
-                
+            if let originalRTCPixelBuffer = pixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(originalRTCPixelBuffer, orientation: orientation, timeStampNs: fixedFrame.timeStampNs) {
                 pixelBuffer = reusltPixelBuffer
-                
-                // Forward frame to RTCVideoSource
-//                let processedPixelBuffer: RTCCVPixelBuffer = RTCCVPixelBuffer(pixelBuffer: reusltPixelBuffer)
-//                videoFrame = RTCVideoFrame(buffer: processedPixelBuffer, rotation: fixedFrame.rotation, timeStampNs: fixedFrame.timeStampNs)
             }
             
             // Recreate videoFrame
