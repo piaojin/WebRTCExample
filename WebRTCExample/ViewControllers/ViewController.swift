@@ -154,7 +154,7 @@ class ViewController: UIViewController {
         sendMessageButton.addTarget(self, action: #selector(sendMessageAction), for: .touchUpInside)
         
         #if !targetEnvironment(simulator)
-        videoCapturerService.startCaptureLocalVideo(position: .front, frame: .captureFramePreset960X540) { _ in
+        videoCapturerService.startCaptureLocalVideo(position: .front, frame: .captureFramePreset1280x720) { _ in
             
         }
         #endif

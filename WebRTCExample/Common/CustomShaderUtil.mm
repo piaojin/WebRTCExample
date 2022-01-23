@@ -32,7 +32,7 @@
         GLchar infolog[logLength];
         // The returned string is null terminated.
         glGetShaderInfoLog(shader, logLength, NULL, infolog);
-        NSLog(@"Shader compile error: %s", infolog);
+        DLog(@"Shader compile error: %s", infolog);
       }
         
       glDeleteShader(shader);
@@ -69,7 +69,7 @@
             GLchar infolog[logLength];
             // The returned string is null terminated.
             glGetProgramInfoLog(program, logLength, NULL, infolog);
-            NSLog(@"Program compile and link error: %s", infolog);
+            DLog(@"Program compile and link error: %s", infolog);
         }
         
         glDeleteProgram(program);
@@ -79,13 +79,13 @@
 }
 
 ///e.g: 手机竖屏时的顶点数据,x,y是顶点坐标,u,v是纹理坐标.
-/// const GLfloat gVertices[] = {
-///      // X, Y, U, V.
-///       -1, -1, 1, 1,
-///        1, -1, 1, 0,
-///        1,  1, 0, 0,
-///       -1,  1, 0, 1,
-/// };
+///const GLfloat gVertices[] = {
+///     X, Y, U, V.
+///      -1, -1, 0, 1,
+///       1, -1, 1, 1,
+///       1,  1, 1, 0,
+///      -1,  1, 0, 0,
+///};
 ///
 /// VBO
 /// pos = position(x,y), tex = texcoord(u,v)
@@ -147,7 +147,7 @@
     return YES;
 }
 
-/// 上传顶点数据,包括顶点坐标和纹理坐标数据
+/// 上传顶点数据,包括顶点坐标和纹理坐标数据，纹理坐标包含纹理的方向,纹理方向也可以通过libyuv来后期旋转不过旋转后的buffer会花屏(还不知道原因)
 /// Set vertex data to the currently bound vertex buffer.
 + (void) setVertexDataWithRotation:(CustomVideoRotation)rotation {
   // When modelview and projection matrices are identity (default) the world is
@@ -157,27 +157,21 @@
   // from (0, 0) to (1, 1) inclusive. Texture coordinates are flipped vertically
   // here because the incoming frame has origin in upper left hand corner but
   // OpenGL expects origin in bottom left corner.
-//  std::array<std::array<GLfloat, 2>, 4> UVCoords = {{
-//      {{0, 1}},  // Lower left.
-//      {{1, 1}},  // Lower right.
-//      {{1, 0}},  // Upper right.
-//      {{0, 0}},  // Upper left.
-//  }};
 
   // Rotate the UV coordinates.
     NSInteger rotation_offset;
   switch (rotation) {
     case CustomVideoRotation_0:
-      rotation_offset = 0;
+      rotation_offset = 2;
       break;
     case CustomVideoRotation_90:
-      rotation_offset = 1;
+      rotation_offset = 0;
       break;
     case CustomVideoRotation_180:
       rotation_offset = 2;
       break;
     case CustomVideoRotation_270:
-      rotation_offset = 3;
+      rotation_offset = 1;
       break;
   }
     
@@ -212,14 +206,13 @@
     /*
      e.g: 手机竖屏时
      const GLfloat gVertices[] = {
-         // X, Y, U, V.
-           -1, -1, 1, 1,
-            1, -1, 1, 0,
-            1,  1, 0, 0,
-           -1,  1, 0, 1,
+          X, Y, U, V.
+           -1, -1, 0, 1,
+            1, -1, 1, 1,
+            1,  1, 1, 0,
+           -1,  1, 0, 0,
      };
      */
-
   glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(gVertices), gVertices);
 }
 

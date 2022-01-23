@@ -10,14 +10,22 @@
 
 #import <Foundation/Foundation.h>
 #import "CustomTypes.h"
+#import <AVFoundation/AVFoundation.h>
 
 @protocol ShaderProtocol <NSObject>
 
 @property(nonatomic, readonly) GLuint VBO;
 @property(nonatomic, readonly) GLuint VAO;
 @property(nonatomic, readonly) GLuint program;
+@property(nonatomic, readonly) EAGLContext *glContext;
 
-- (void)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation yPlane:(GLuint)yPlane uvPlane:(GLuint)uvPlane;
+/// glContext used for creating texture cache and should the same as the one which used for process pixel buffer. And the glContext will set value by CustomPixelBufferProcesser.
+- (void)setGlContext:(EAGLContext *)glContext;
+
+/// Apply shaders. Each plane is given as a texture. Process NV12 pixel buffer.
+- (CVPixelBufferRef)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
+                               yPlane:(GLuint)yPlane
+                              uvPlane:(GLuint)uvPlane textureSize:(CGSize)textureSize CF_RETURNS_RETAINED;
 
 @end
 

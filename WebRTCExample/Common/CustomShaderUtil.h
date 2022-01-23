@@ -26,13 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (GLuint) createProgramWithVertexShader:(GLuint)vertexShader fragmentShader:(GLuint)fragmentShader;
 
 ///e.g: 手机竖屏时的顶点数据,x,y是顶点坐标,u,v是纹理坐标.
-/// const GLfloat gVertices[] = {
-///      // X, Y, U, V.
-///       -1, -1, 1, 1,
-///        1, -1, 1, 0,
-///        1,  1, 0, 0,
-///       -1,  1, 0, 1,
-/// };
+///const GLfloat gVertices[] = {
+///     X, Y, U, V.
+///      -1, -1, 0, 1,
+///       1, -1, 1, 1,
+///       1,  1, 1, 0,
+///      -1,  1, 0, 0,
+///};
 ///
 /// VBO
 /// pos = position(x,y), tex = texcoord(u,v)

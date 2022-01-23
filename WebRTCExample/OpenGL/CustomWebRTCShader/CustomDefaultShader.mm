@@ -48,31 +48,6 @@ static const char kI420FragmentShaderSource[] =
   "  }\n";
 
 // 最简单的灰度滤镜片段着色器: 原理 -> float color = (r + g + b) / 3.0 -> gl_FragColor = vec4(color,color,color,1.0)
-static const char kNV12FragmentShaderSource[] =
-  SHADER_VERSION
-  "precision mediump float;"
-  FRAGMENT_SHADER_IN " vec2 v_texcoord;\n"
-  "uniform lowp sampler2D s_textureY;\n"
-  "uniform lowp sampler2D s_textureUV;\n"
-  FRAGMENT_SHADER_OUT
-  "void main() {\n"
-  "    mediump float y;\n"
-  "    mediump vec2 uv;\n"
-  "    y = " FRAGMENT_SHADER_TEXTURE "(s_textureY, v_texcoord).r;\n"
-  "    uv = " FRAGMENT_SHADER_TEXTURE "(s_textureUV, v_texcoord).ra -\n"
-  "        vec2(0.5, 0.5);\n"
-  "    mediump float r,g,b,color;\n"
-  "    r = y + 1.403 * uv.y;\n"
-  "    g = y - 0.344 * uv.x - 0.714 * uv.y;\n"
-  "    b = y + 1.770 * uv.x;\n"
-  "    color = (r + g + b) / 3.0;\n"
-  "    " FRAGMENT_SHADER_COLOR " = vec4(color,\n"
-  "                                     color,\n"
-  "                                     color,\n"
-  "                                     1.0);\n"
-  "  }\n";
-
-// 原始片段着色器
 //static const char kNV12FragmentShaderSource[] =
 //  SHADER_VERSION
 //  "precision mediump float;"
@@ -86,11 +61,36 @@ static const char kNV12FragmentShaderSource[] =
 //  "    y = " FRAGMENT_SHADER_TEXTURE "(s_textureY, v_texcoord).r;\n"
 //  "    uv = " FRAGMENT_SHADER_TEXTURE "(s_textureUV, v_texcoord).ra -\n"
 //  "        vec2(0.5, 0.5);\n"
-//  "    " FRAGMENT_SHADER_COLOR " = vec4(y + 1.403 * uv.y,\n"
-//  "                                     y - 0.344 * uv.x - 0.714 * uv.y,\n"
-//  "                                     y + 1.770 * uv.x,\n"
+//  "    mediump float r,g,b,color;\n"
+//  "    r = y + 1.403 * uv.y;\n"
+//  "    g = y - 0.344 * uv.x - 0.714 * uv.y;\n"
+//  "    b = y + 1.770 * uv.x;\n"
+//  "    color = (r + g + b) / 3.0;\n"
+//  "    " FRAGMENT_SHADER_COLOR " = vec4(color,\n"
+//  "                                     color,\n"
+//  "                                     color,\n"
 //  "                                     1.0);\n"
 //  "  }\n";
+
+// 原始片段着色器
+static const char kNV12FragmentShaderSource[] =
+  SHADER_VERSION
+  "precision mediump float;"
+  FRAGMENT_SHADER_IN " vec2 v_texcoord;\n"
+  "uniform lowp sampler2D s_textureY;\n"
+  "uniform lowp sampler2D s_textureUV;\n"
+  FRAGMENT_SHADER_OUT
+  "void main() {\n"
+  "    mediump float y;\n"
+  "    mediump vec2 uv;\n"
+  "    y = " FRAGMENT_SHADER_TEXTURE "(s_textureY, v_texcoord).r;\n"
+  "    uv = " FRAGMENT_SHADER_TEXTURE "(s_textureUV, v_texcoord).ra -\n"
+  "        vec2(0.5, 0.5);\n"
+  "    " FRAGMENT_SHADER_COLOR " = vec4(y + 1.403 * uv.y,\n"
+  "                                     y - 0.344 * uv.x - 0.714 * uv.y,\n"
+  "                                     y + 1.770 * uv.x,\n"
+  "                                     1.0);\n"
+  "  }\n";
 
 
 @implementation CustomDefaultShader {

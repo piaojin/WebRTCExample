@@ -55,18 +55,31 @@ class CustomVideoSource: NSObject, RTCVideoCapturerDelegate {
         var videoFrame: RTCVideoFrame = frame
         
         if pixelBufferProcesser?.shouldProcessFrameBuffer() == true {
-            var originalRTCPixelBuffer: CVPixelBuffer?
+            var pixelBuffer: CVPixelBuffer?
             
             // Get original RTC pixelBuffer
             if let rtcCVPixelBuffer = fixedFrame.buffer as? RTCCVPixelBuffer {
-                originalRTCPixelBuffer = rtcCVPixelBuffer.pixelBuffer
+                pixelBuffer = rtcCVPixelBuffer.pixelBuffer
             }
             
             // Process pixelBuffer. e.g. Add filter, effects
-            if let originalRTCPixelBuffer = originalRTCPixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(CustomVideoFrame(buffer: originalRTCPixelBuffer, rotation: convertVideoRotation(rotation: fixedFrame.rotation), timeStampNs: fixedFrame.timeStampNs)) {
+            if let originalRTCPixelBuffer = pixelBuffer, let reusltPixelBuffer = pixelBufferProcesser?.processBuffer(CustomVideoFrame(buffer: originalRTCPixelBuffer, rotation: convertVideoRotation(rotation: fixedFrame.rotation), timeStampNs: fixedFrame.timeStampNs)) {
+                
+                pixelBuffer = reusltPixelBuffer
+                
                 // Forward frame to RTCVideoSource
-                let processedPixelBuffer: RTCCVPixelBuffer = RTCCVPixelBuffer(pixelBuffer: reusltPixelBuffer)
-                videoFrame = RTCVideoFrame(buffer: processedPixelBuffer, rotation: fixedFrame.rotation, timeStampNs: fixedFrame.timeStampNs)
+//                let processedPixelBuffer: RTCCVPixelBuffer = RTCCVPixelBuffer(pixelBuffer: reusltPixelBuffer)
+//                videoFrame = RTCVideoFrame(buffer: processedPixelBuffer, rotation: fixedFrame.rotation, timeStampNs: fixedFrame.timeStampNs)
+            }
+            
+            // Recreate videoFrame
+            if let pixelBuffer = pixelBuffer {
+                var rotation: RTCVideoRotation = fixedFrame.rotation;
+                if rotation == RTCVideoRotation._270 {
+                    rotation = RTCVideoRotation._0
+                }
+                let rtcCVPixelBuffer = RTCCVPixelBuffer(pixelBuffer: pixelBuffer)
+                videoFrame = RTCVideoFrame(buffer: rtcCVPixelBuffer, rotation: rotation, timeStampNs: fixedFrame.timeStampNs)
             }
         }
         

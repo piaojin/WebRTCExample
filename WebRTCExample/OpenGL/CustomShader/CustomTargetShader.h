@@ -7,7 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
-#import <OpenGLES/ES3/gl.h>
+//#import <OpenGLES/ES3/gl.h>
+#import <OpenGLES/ES3/glext.h>
 #else
 #import <OpenGL/gl3.h>
 #endif
@@ -21,11 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) GLuint VBO;
 @property(nonatomic, readonly) GLuint VAO;
 @property(nonatomic, readonly) GLuint program;
+@property(nonatomic, readonly) EAGLContext *glContext;
 
-/// 应用着色器. Each plane is given as a texture.
-- (void)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
+/// glContext used for creating texture cache and should the same as the one which used for process pixel buffer. And the glContext will set value by CustomPixelBufferProcesser.
+- (void)setGlContext:(EAGLContext *)glContext;
+
+/// Apply shaders. Each plane is given as a texture. Process NV12 pixel buffer.
+- (nullable CVPixelBufferRef)applyShadingForTextureWithRotation:(CustomVideoRotation)rotation
                                yPlane:(GLuint)yPlane
-                              uvPlane:(GLuint)uvPlane;
+                              uvPlane:(GLuint)uvPlane textureSize:(CGSize)textureSize CF_RETURNS_RETAINED;
 
 @end
 

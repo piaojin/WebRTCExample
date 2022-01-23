@@ -12,53 +12,60 @@
 #import "ShaderProtocol.h"
 #import "CustomVideoFrame.h"
 
-@implementation CustomPixelBufferProcesser {
-  EAGLContext *_glContext;
-  id<ShaderProtocol> _shader;
-  CustomTextureCache *_textureCache;
-  // As timestamps should be unique between frames, will store last
-  // drawn frame timestamp instead of the whole frame to reduce memory usage.
-  int64_t _lastDrawnFrameTimeStampNs;
-}
+@interface CustomPixelBufferProcesser()
 
+@property(nonatomic, strong) EAGLContext *glContext;
+@property(nonatomic, strong) CustomTextureCache *textureCache;
+@property(nonatomic, assign) int64_t lastDrawnFrameTimeStampNs;
+@property(nonatomic) id<ShaderProtocol> shader;
+
+@end
+
+@implementation CustomPixelBufferProcesser
+
+/// Will use default shader
 - (instancetype)init {
-  return [self initWithShader:[[CustomTargetShader alloc] init]];
+    if (self = [super init]) {
+        if (![self configure]) {
+            return nil;
+        }
+        _shader = [[CustomTargetShader alloc] init];
+        [_shader setGlContext:_glContext];
+    }
+    return self;
 }
 
 - (instancetype)initWithShader:(id<ShaderProtocol>)shader {
-  if (self = [super init]) {
-    _shader = shader;
-    if (![self configure]) {
-      return nil;
+    if (self = [super init]) {
+        if (![self configure]) {
+            return nil;
+        }
+        _shader = shader;
+        [_shader setGlContext:_glContext];
     }
-  }
-  return self;
+    return self;
 }
 
+/// Used for init.
 - (BOOL)configure {
-  EAGLContext *glContext =
-    [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-  if (!glContext) {
-    glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-  }
-  if (!glContext) {
-    NSLog(@"Failed to create EAGLContext");
-    return NO;
-  }
-  _glContext = glContext;
+    EAGLContext *glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    if (!glContext) {
+        glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    }
+  
+    if (!glContext) {
+        DLog(@"Failed to create EAGLContext");
+        return NO;
+    }
+    _glContext = glContext;
 
-  
     // Listen to application state in order to clean up OpenGL before app goes away.
-    NSNotificationCenter *notificationCenter =
-    [NSNotificationCenter defaultCenter];
-  
-    [notificationCenter addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
                          selector:@selector(willResignActive)
                              name:UIApplicationWillResignActiveNotification
                            object:nil];
-    
   
-    [notificationCenter addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
                          selector:@selector(didBecomeActive)
                              name:UIApplicationDidBecomeActiveNotification
                            object:nil];
@@ -70,12 +77,11 @@
           [strongSelf setupGL];
         }
     });
-  return YES;
+    return YES;
 }
 
 - (void)dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     __weak typeof(self)weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
@@ -86,11 +92,11 @@
         }
     });
   
-  [self ensureGLContext];
-  _shader = nil;
-  if (_glContext && [EAGLContext currentContext] == _glContext) {
-    [EAGLContext setCurrentContext:nil];
-  }
+    [self ensureGLContext];
+    _shader = nil;
+    if (_glContext && [EAGLContext currentContext] == _glContext) {
+        [EAGLContext setCurrentContext:nil];
+    }
 }
 
 /// Note: This function pass ownership of return value(CVPixelBufferRef) to the caller.
@@ -104,23 +110,18 @@
     [self ensureGLContext];
     glClear(GL_COLOR_BUFFER_BIT);
     
-    if (!_textureCache) {
-      _textureCache = [[CustomTextureCache alloc] initWithContext:_glContext];
-    }
+    // 上传pixel buffer到OpenGL ES
+    [self.textureCache uploadFrameToTextures:frame.buffer];
     
-    if (_textureCache) {
-      // 上传pixel buffer到OpenGL ES
-      [_textureCache uploadFrameToTextures:frame.buffer];
-        
-        // 应用着色器(包含绘制)
-        [_shader applyShadingForTextureWithRotation:frame.rotation yPlane:_textureCache.yTexture uvPlane:_textureCache.uvTexture];
-        
-      [_textureCache releaseTextures];
-
-      _lastDrawnFrameTimeStampNs = frame.timeStampNs;
-    }
+    CGSize textureSize = CGSizeMake(CVPixelBufferGetWidth(frame.buffer),
+                                    CVPixelBufferGetHeight(frame.buffer));
+    // 应用着色器(包含绘制)
+    CVPixelBufferRef pixelBuffer = [_shader applyShadingForTextureWithRotation:frame.rotation yPlane:_textureCache.yTexture uvPlane:_textureCache.uvTexture textureSize:textureSize];
+  
+    [_textureCache releaseTextures];
+    _lastDrawnFrameTimeStampNs = frame.timeStampNs;
     
-    return nil;
+    return pixelBuffer;
 }
 
 - (BOOL)shouldProcessFrameBuffer {
@@ -152,6 +153,13 @@
     if ([EAGLContext currentContext] != _glContext) {
         [EAGLContext setCurrentContext:_glContext];
     }
+}
+
+- (CustomTextureCache *)textureCache {
+    if (!_textureCache) {
+      _textureCache = [[CustomTextureCache alloc] initWithContext:_glContext];
+    }
+    return _textureCache;
 }
 
 @end

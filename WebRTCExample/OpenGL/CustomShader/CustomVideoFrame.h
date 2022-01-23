@@ -5,7 +5,7 @@
 //  Created by rcadmin on 2021/12/27.
 //
 
-#import <AVFoundation/AVFoundation.h>
+#import <CoreVideo/CVPixelBuffer.h>
 #import <Foundation/Foundation.h>
 #import "CustomTypes.h"
 

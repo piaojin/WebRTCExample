@@ -23,6 +23,9 @@ class CustomVideoCapturerService {
     init(webRTCService: WebRTCService) {
         self.webRTCService = webRTCService
         self.cameraVideoCapturer = RTCCameraVideoCapturer(delegate: webRTCService.localVideoSource)
+//        if let output = self.cameraVideoCapturer.captureSession.outputs.first as? AVCaptureVideoDataOutput {
+//            output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
+//        }
     }
     
     func startCaptureLocalVideo(position: AVCaptureDevice.Position, frame: CaptureFrame, completeHandler: ((Error) -> Void)?) {

@@ -29,7 +29,7 @@
 		4367A9B42779FB5B0075A811 /* CustomTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9B32779FB5B0075A811 /* CustomTextureCache.m */; };
 		4367A9B72779FE390075A811 /* CustomTargetShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9B62779FE390075A811 /* CustomTargetShader.mm */; };
 		4367A9BB277A0EA00075A811 /* CustomVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */; };
-		4367A9D6277B3D3B0075A811 /* CustomPixelBufferUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */; };
+		43A06EC1278F250500E37909 /* CustomPixelBufferUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43A06EC0278F250500E37909 /* CustomPixelBufferUtils.mm */; };
 		43CB3FF62777777600400A1A /* CustomShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF52777777600400A1A /* CustomShader.mm */; };
 		43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */; };
 		43FA4F3227721B0C0077A2D4 /* ShaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */; };
@@ -72,12 +72,14 @@
 		4367A9B9277A0EA00075A811 /* CustomVideoFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoFrame.h; sourceTree = "<group>"; };
 		4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoFrame.m; sourceTree = "<group>"; };
 		4367A9BC277AB9F00075A811 /* ProcessPixelBufferProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcessPixelBufferProtocol.h; sourceTree = "<group>"; };
-		4367A9D4277B3D3B0075A811 /* CustomPixelBufferUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPixelBufferUtil.h; sourceTree = "<group>"; };
-		4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPixelBufferUtil.m; sourceTree = "<group>"; };
+		43A06EBF278F250500E37909 /* CustomPixelBufferUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPixelBufferUtils.h; sourceTree = "<group>"; };
+		43A06EC0278F250500E37909 /* CustomPixelBufferUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomPixelBufferUtils.mm; sourceTree = "<group>"; };
 		43CB3FF52777777600400A1A /* CustomShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomShader.mm; sourceTree = "<group>"; };
 		43CB3FF72778A4A600400A1A /* CustomShaderUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomShaderUtil.h; sourceTree = "<group>"; };
 		43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomShaderUtil.mm; sourceTree = "<group>"; };
 		43CB3FFA2778A59400400A1A /* CustomTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTypes.h; sourceTree = "<group>"; };
+		43F475CB279D35DF00619CDD /* CustomDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDefines.h; sourceTree = "<group>"; };
+		43F475CC279D3F5000619CDD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderUtils.swift; sourceTree = "<group>"; };
 		43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebRTCExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFF9A9D2A79BA50F0BE8456E /* Pods-WebRTCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCExample.release.xcconfig"; path = "Target Support Files/Pods-WebRTCExample/Pods-WebRTCExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		436384CE275FA63C00009BFB /* WebRTCExample */ = {
 			isa = PBXGroup;
 			children = (
+				43A06EBE278F24DA00E37909 /* Common */,
 				43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */,
 				43FA4F2C27721A020077A2D4 /* OpenGL */,
 				43139C7327623F53002E6ECC /* View */,
@@ -213,8 +216,6 @@
 		4367AA1A277CAA230075A811 /* CustomShader */ = {
 			isa = PBXGroup;
 			children = (
-				43CB3FF72778A4A600400A1A /* CustomShaderUtil.h */,
-				43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */,
 				43CB3FFA2778A59400400A1A /* CustomTypes.h */,
 				4367A9B22779FB5A0075A811 /* CustomTextureCache.h */,
 				4367A9B32779FB5B0075A811 /* CustomTextureCache.m */,
@@ -226,10 +227,22 @@
 				4367A9BA277A0EA00075A811 /* CustomVideoFrame.m */,
 				4367A9B8277A03CC0075A811 /* ShaderProtocol.h */,
 				4367A9BC277AB9F00075A811 /* ProcessPixelBufferProtocol.h */,
-				4367A9D4277B3D3B0075A811 /* CustomPixelBufferUtil.h */,
-				4367A9D5277B3D3B0075A811 /* CustomPixelBufferUtil.m */,
 			);
 			path = CustomShader;
+			sourceTree = "<group>";
+		};
+		43A06EBE278F24DA00E37909 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */,
+				43CB3FF72778A4A600400A1A /* CustomShaderUtil.h */,
+				43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */,
+				43A06EBF278F250500E37909 /* CustomPixelBufferUtils.h */,
+				43A06EC0278F250500E37909 /* CustomPixelBufferUtils.mm */,
+				43F475CB279D35DF00619CDD /* CustomDefines.h */,
+				43F475CC279D3F5000619CDD /* PrefixHeader.pch */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		43FA4F2C27721A020077A2D4 /* OpenGL */ = {
@@ -237,7 +250,6 @@
 			children = (
 				4367AA1A277CAA230075A811 /* CustomShader */,
 				431BD884277407B700BC61AA /* CustomWebRTCShader */,
-				43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -376,6 +388,7 @@
 				4367A9B72779FE390075A811 /* CustomTargetShader.mm in Sources */,
 				4367A9BB277A0EA00075A811 /* CustomVideoFrame.m in Sources */,
 				43139C9B276479C9002E6ECC /* Const.swift in Sources */,
+				43A06EC1278F250500E37909 /* CustomPixelBufferUtils.mm in Sources */,
 				4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */,
 				43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */,
 				436384E7275FAF1B00009BFB /* WebRTCService.swift in Sources */,
@@ -387,7 +400,6 @@
 				4363852C2760D87000009BFB /* CustomVideoView.swift in Sources */,
 				436384E9275FAF3D00009BFB /* SignalingService.swift in Sources */,
 				436384D2275FA63C00009BFB /* SceneDelegate.swift in Sources */,
-				4367A9D6277B3D3B0075A811 /* CustomPixelBufferUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +552,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J5NZUFGLBJ;
 				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/WebRTCExample/Common/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -547,6 +561,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebRTCExample/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera permission";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone permission";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -558,7 +574,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo.WebRTCExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WebRTCExample/WebRTCExample-Bridging-Header.h";
@@ -579,6 +595,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J5NZUFGLBJ;
 				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/WebRTCExample/Common/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -586,6 +604,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebRTCExample/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera permission";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone permission";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -597,7 +617,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo.WebRTCExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piaojin.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "WebRTCExample/WebRTCExample-Bridging-Header.h";

@@ -921,24 +921,28 @@ PODS:
     - abseil/base/config
     - abseil/meta/type_traits
   - GoogleWebRTC (1.1.31999)
+  - libyuv-iOS (1.0.2)
   - Starscream (3.0.6)
 
 DEPENDENCIES:
   - abseil (~> 1.20211102.0)
   - GoogleWebRTC
+  - libyuv-iOS (~> 1.0.2)
   - Starscream (~> 3.0.2)
 
 SPEC REPOS:
   trunk:
     - abseil
     - GoogleWebRTC
+    - libyuv-iOS
     - Starscream
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
+  libyuv-iOS: 5a154ccc84ec754029886ecb607512731fe30640
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
-PODFILE CHECKSUM: 9e829206a11e8029797cb1deca6aceecff384807
+PODFILE CHECKSUM: 85b22069eac755c57eb43f500985a03072598b45
 
 COCOAPODS: 1.10.1
