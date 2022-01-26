@@ -32,6 +32,7 @@
 		43A06EC1278F250500E37909 /* CustomPixelBufferUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43A06EC0278F250500E37909 /* CustomPixelBufferUtils.mm */; };
 		43CB3FF62777777600400A1A /* CustomRTCShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF52777777600400A1A /* CustomRTCShader.mm */; };
 		43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43CB3FF82778A4A600400A1A /* CustomShaderUtil.mm */; };
+		43F475CF279DA5B600619CDD /* CustomI420TextureCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43F475CE279DA5B600619CDD /* CustomI420TextureCache.mm */; };
 		43FA4F3227721B0C0077A2D4 /* ShaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,8 @@
 		43CB3FFA2778A59400400A1A /* CustomTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTypes.h; sourceTree = "<group>"; };
 		43F475CB279D35DF00619CDD /* CustomDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomDefines.h; sourceTree = "<group>"; };
 		43F475CC279D3F5000619CDD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		43F475CD279DA5B600619CDD /* CustomI420TextureCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomI420TextureCache.h; sourceTree = "<group>"; };
+		43F475CE279DA5B600619CDD /* CustomI420TextureCache.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomI420TextureCache.mm; sourceTree = "<group>"; };
 		43FA4F3127721B0C0077A2D4 /* ShaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderUtils.swift; sourceTree = "<group>"; };
 		43FA4F332772E73A0077A2D4 /* WebRTCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebRTCExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		EFF9A9D2A79BA50F0BE8456E /* Pods-WebRTCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebRTCExample.release.xcconfig"; path = "Target Support Files/Pods-WebRTCExample/Pods-WebRTCExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 			children = (
 				4367A9B22779FB5A0075A811 /* CustomNV12TextureCache.h */,
 				4367A9B32779FB5B0075A811 /* CustomNV12TextureCache.m */,
+				43F475CD279DA5B600619CDD /* CustomI420TextureCache.h */,
+				43F475CE279DA5B600619CDD /* CustomI420TextureCache.mm */,
 				431BD88B277409D100BC61AA /* CustomPixelBufferProcesser.h */,
 				431BD88C277409D100BC61AA /* CustomPixelBufferProcesser.m */,
 				4367A9B52779FE390075A811 /* CustomTargetShader.h */,
@@ -391,6 +396,7 @@
 				43A06EC1278F250500E37909 /* CustomPixelBufferUtils.mm in Sources */,
 				4363852E2760E5B200009BFB /* CustomVideoCapturerService.swift in Sources */,
 				43CB3FF92778A4A600400A1A /* CustomShaderUtil.mm in Sources */,
+				43F475CF279DA5B600619CDD /* CustomI420TextureCache.mm in Sources */,
 				436384E7275FAF1B00009BFB /* WebRTCService.swift in Sources */,
 				4367A9B42779FB5B0075A811 /* CustomNV12TextureCache.m in Sources */,
 				431BD88A277408DB00BC61AA /* CustomRTCI420TextureCache.mm in Sources */,

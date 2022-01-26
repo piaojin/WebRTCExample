@@ -7,11 +7,15 @@
 
 #import "CustomNV12TextureCache.h"
 
-@implementation CustomNV12TextureCache {
-    CVOpenGLESTextureCacheRef _textureCache;
-    CVOpenGLESTextureRef _yTextureRef;
-    CVOpenGLESTextureRef _uvTextureRef;
-}
+@interface CustomNV12TextureCache()
+
+@property(nonatomic) CVOpenGLESTextureCacheRef textureCache;
+@property(nonatomic) CVOpenGLESTextureRef yTextureRef;
+@property(nonatomic) CVOpenGLESTextureRef uvTextureRef;
+
+@end
+
+@implementation CustomNV12TextureCache
 
 - (GLenum)yTextureTarget {
     return CVOpenGLESTextureGetTarget(_yTextureRef);

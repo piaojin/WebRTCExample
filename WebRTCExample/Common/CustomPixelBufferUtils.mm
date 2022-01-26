@@ -54,7 +54,7 @@
     return pixelBuffer;
 }
 
-///目前会有一些绿屏问题
+///目前会有一些绿屏问题: webrtc/api/video/i420_buffer.cc 中有各个分量取值的代码
 + (nullable CVPixelBufferRef) convertBGRAToI420:(nonnull CVPixelBufferRef) pixelBufferBGRA CF_RETURNS_RETAINED {
     CVPixelBufferLockBaseAddress(pixelBufferBGRA, kCVPixelBufferLock_ReadOnly);
     const uint8_t *src_argb = static_cast<uint8_t*>(CVPixelBufferGetBaseAddress(pixelBufferBGRA));
@@ -79,8 +79,8 @@
     size_t dst_stride_v = (width + 1) / 2;
     
     uint8_t *dst_u = dst_y + width * height;
-//    uint8_t *dst_v = dst_y + dst_stride_y * height + dst_stride_u * ((height + 1) / 2);
-    uint8_t *dst_v = dst_u + (width + 1) / 2 * (height + 1) / 2;
+    uint8_t *dst_v = dst_y + dst_stride_y * height + dst_stride_u * ((height + 1) / 2);
+//    uint8_t *dst_v = dst_u + (width + 1) / 2 * (height + 1) / 2;
 
     // 旋转问题通过修改纹理坐标系
     libyuv::ARGBToI420(src_argb, (int)src_stride_argb, dst_y, (int)dst_stride_y, dst_u, (int)dst_stride_u, dst_v, (int)dst_stride_v, (int)width, (int)height);

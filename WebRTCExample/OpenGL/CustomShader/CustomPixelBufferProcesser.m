@@ -7,6 +7,7 @@
 
 #import "CustomPixelBufferProcesser.h"
 #import "CustomNV12TextureCache.h"
+#import "CustomI420TextureCache.h"
 #import "CustomTargetShader.h"
 #import <GLKit/GLKit.h>
 #import "ShaderProtocol.h"
@@ -15,6 +16,7 @@
 
 @property(nonatomic, strong) EAGLContext *glContext;
 @property(nonatomic, strong) CustomNV12TextureCache *nv12TextureCache;
+@property(nonatomic, strong) CustomI420TextureCache *i420TextureCache;
 @property(nonatomic, assign) int64_t lastDrawnFrameTimeStampNs;
 @property(nonatomic) id<ShaderProtocol> shader;
 
@@ -29,7 +31,7 @@
             return nil;
         }
         _shader = [[CustomTargetShader alloc] init];
-        [_shader setGlContext:_glContext];
+        [_shader setGLContext:_glContext];
     }
     return self;
 }
@@ -41,7 +43,7 @@
             return nil;
         }
         _shader = shader;
-        [_shader setGlContext:_glContext];
+        [_shader setGLContext:_glContext];
     }
     return self;
 }
@@ -74,7 +76,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-          [strongSelf setupGL];
+          [strongSelf setUpGL];
         }
     });
     return YES;
@@ -88,7 +90,7 @@
         UIApplicationState appState =
             [UIApplication sharedApplication].applicationState;
         if (appState == UIApplicationStateActive) {
-          [strongSelf teardownGL];
+          [strongSelf tearDownGL];
         }
     });
   
@@ -110,15 +112,23 @@
     [self ensureGLContext];
     glClear(GL_COLOR_BUFFER_BIT);
     
-    // 上传pixel buffer到OpenGL ES
-    [self.nv12TextureCache uploadFrameToTextures:pixelBuffer];
+    CVPixelBufferRef resPixelBuffer = NULL;
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
     
-    CGSize textureSize = CGSizeMake(CVPixelBufferGetWidth(pixelBuffer),
-                                    CVPixelBufferGetHeight(pixelBuffer));
-    // 应用着色器(包含绘制)
-    CVPixelBufferRef resPixelBuffer = [_shader applyShadingForTextureWithRotation:orientation yPlane:_nv12TextureCache.yTexture uvPlane:_nv12TextureCache.uvTexture textureSize:textureSize];
-  
-    [_nv12TextureCache releaseTextures];
+    OSType pixelFormatType = CVPixelBufferGetPixelFormatType(pixelBuffer);
+    if (pixelFormatType == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange) {
+        // 上传pixel buffer到OpenGL ES
+        [self.nv12TextureCache uploadFrameToTextures:pixelBuffer];
+        // 应用着色器(包含绘制)
+        resPixelBuffer = [_shader applyShadingForTextureWithWidth:(int)width height:(int)height orientation:orientation yPlane:self.nv12TextureCache.yTexture uvPlane:self.nv12TextureCache.uvTexture];
+      
+        [self.nv12TextureCache releaseTextures];
+    } else {
+        [self.i420TextureCache uploadFrameToTextures:pixelBuffer];
+        resPixelBuffer = [_shader applyShadingForTextureWithWidth:(int)width height:(int)height orientation:orientation yPlane:self.i420TextureCache.yTexture uPlane:self.i420TextureCache.uTexture vPlane:self.i420TextureCache.vTexture];
+    }
+    
     _lastDrawnFrameTimeStampNs = timeStampNs;
     
     return resPixelBuffer;
@@ -130,22 +140,23 @@
 
 #pragma mark - Private
 
-- (void)setupGL {
+- (void)setUpGL {
     [self ensureGLContext];
     glDisable(GL_DITHER);
 }
 
-- (void)teardownGL {
+- (void)tearDownGL {
     [self ensureGLContext];
     _nv12TextureCache = nil;
+    _i420TextureCache = nil;
 }
 
 - (void)didBecomeActive {
-    [self setupGL];
+    [self setUpGL];
 }
 
 - (void)willResignActive {
-    [self teardownGL];
+    [self tearDownGL];
 }
 
 - (void)ensureGLContext {
@@ -160,6 +171,13 @@
       _nv12TextureCache = [[CustomNV12TextureCache alloc] initWithContext:_glContext];
     }
     return _nv12TextureCache;
+}
+
+- (CustomI420TextureCache *)i420TextureCache {
+    if (!_i420TextureCache) {
+      _i420TextureCache = [[CustomI420TextureCache alloc] initWithContext:_glContext];
+    }
+    return _i420TextureCache;
 }
 
 @end
